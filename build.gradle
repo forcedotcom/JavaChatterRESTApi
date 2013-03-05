@@ -1,0 +1,28 @@
+apply plugin: 'java'
+
+sourceSets.main.java.srcDirs = ['src']
+sourceSets.test.java.srcDirs = ['test/unit/src']
+
+repositories { 
+    // Hardcoded path to the lib and lib-test folder for now
+    // This should/could probably be updated to use maven completely
+    flatDir name:'local', dirs:'lib'
+    flatDir name:'localTest', dirs:'lib-test'
+
+    mavenCentral()
+}
+ 
+dependencies { 
+    compile 'local:commons-codec:1.7'
+    compile 'local:commons-httpclient:3.1'
+    compile 'local:jackson-all:1.9.2'
+    compile 'local:json'
+
+    testCompile 'localTest:commons-io:1.4'
+    testCompile 'localTest:commons-logging:1.1.1'
+    testCompile 'localTest:javassist:3.17.1-GA'
+    testCompile 'localTest:mockito-all:1.8.5'
+    testCompile 'localTest:powermock-mockito:1.4.9-full'
+    
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}

@@ -1,0 +1,57 @@
+Libraries
+==========================
+- commons-httpclient
+file: commons-httpclient-3.1.jar
+license: Apache License (V2.0)
+website: https://hc.apache.org/httpclient-3.x/
+
+- commons-codec (required by commons-httpclient)
+file: commons-codec-1.7.jar 
+license: Apache License (V2.0)
+website: https://commons.apache.org/codec/
+
+- Jackson
+file: jackson-all-1.9.2.jar 
+license: Apache License (V2.0)
+website: http://jackson.codehaus.org/
+
+- JSON
+file: json.jar 
+license: See http://www.json.org/license.html
+website: http://json.org/
+
+
+Libraries used for testing
+==========================
+
+These are not need at runtime, and are only used for unittests and integration tests
+
+- jUnit4
+file: (Included in Eclipse IDE)
+license: Common Public License - v 1.0 (http://junit.sourceforge.net/cpl-v10.html)
+website: http://junit.sourceforge.net/
+
+- Mockito
+file: mockito-all-1.8.5.jar
+license: MIT License (http://opensource.org/licenses/mit-license.php)
+website: https://code.google.com/p/mockito/
+
+- PowerMockito
+file: powermock-mockito-1.4.9.jar
+license: Apache License (V2.0)
+website: https://code.google.com/p/powermock/
+
+- commons-io
+file: commons-io-1.4.jar
+license: Apache License (V2.0)
+website: https://commons.apache.org/io/
+
+- commons-logging (required by commons-io)
+file: commons-logging-1.1.1.jar
+license: Apache License (V2.0)
+website: https://commons.apache.org/logging/
+
+- javassist
+file: javassist-3.17.1-GA.jar
+license: MOZILLA PUBLIC LICENSE Version 1.1
+website: http://sourceforge.net/projects/jboss/files/Javassist/3.17.1-GA/
