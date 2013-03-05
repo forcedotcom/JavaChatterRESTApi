@@ -100,3 +100,6 @@ The BSD 2-Clause License
 http://opensource.org/licenses/BSD-2-Clause
 
 See [LICENSE.txt](./LICENSE.txt)
+
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/6ca79e72bf275bb790cfda419b72675b "githalytics.com")](http://githalytics.com/forcedotcom/JavaChatterRESTApi)
