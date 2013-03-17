@@ -33,18 +33,20 @@ import com.salesforce.chatter.authentication.methods.InteractiveAuthentication;
 import com.salesforce.chatter.authentication.methods.RefreshTokenAuthentication;
 import com.salesforce.chatter.authentication.methods.UsernamePasswordAuthentication;
 
+//@formatter:off
 /**
  * <p>ChatterAuthentice is where all authentication is done. It takes various input credentials and uses those to
  * request an Access Token from Salesforce.com.</p>
  * 
  * <p>This token is then returned to the caller and can be used in future calls to the Salesforce.com app.</p>
  * 
- * @see http://wiki.developerforce.com/index.php/Digging_Deeper_into_OAuth_2.0_on_Force.com)
+ * @see <a href="http://wiki.developerforce.com/index.php/Digging_Deeper_into_OAuth_2.0_on_Force.com">http://wiki.developerforce.com/index.php/Digging_Deeper_into_OAuth_2.0_on_Force.com</a>
  * 
  * @author jroel
  * @since 1.0
  * 
  */
+//@formatter:on
 public class ChatterAuthenticate {
 
     /**

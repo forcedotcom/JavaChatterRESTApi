@@ -53,11 +53,15 @@ public class InteractiveAuthentication extends AuthentificationMethod {
     }
 
     /**
+     * <p>Start the interactive authentication. It will ask the user to visit the authentication page and report back
+     * the verification code.</p>
      * 
-     * @param chatterData
-     * @return
-     * @throws IOException
-     * @throws UnauthenticatedSessionException
+     * @return ChatterAuthToken When authenticated with success, the ChatterAuthToken will be returned
+     * @throws IOException Thrown when a problem during I/O occurs
+     * @throws AuthenticationException in case we got a String that looked like a Verification code, but was the wrong
+     *         one
+     * @throws UnauthenticatedSessionException Thrown if after several attempts no valid authentication token was
+     *         created
      */
     public ChatterAuthToken authenticate() throws IOException, UnauthenticatedSessionException, AuthenticationException {
         boolean keepTrying = true;

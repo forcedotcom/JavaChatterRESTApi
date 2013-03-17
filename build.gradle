@@ -1,28 +1,31 @@
 apply plugin: 'java'
+apply plugin: 'eclipse'
+
+version = 1.0
 
 sourceSets.main.java.srcDirs = ['src']
 sourceSets.test.java.srcDirs = ['test/unit/src']
 
-repositories { 
-    // Hardcoded path to the lib and lib-test folder for now
-    // This should/could probably be updated to use maven completely
-    flatDir name:'local', dirs:'lib'
-    flatDir name:'localTest', dirs:'lib-test'
+sourceSets {
+    integrationTest
+}
+sourceSets.integrationTest.java.srcDirs = ['test/integration/src']
 
+repositories {
     mavenCentral()
 }
- 
-dependencies { 
-    compile 'local:commons-codec:1.7'
-    compile 'local:commons-httpclient:3.1'
-    compile 'local:jackson-all:1.9.2'
-    compile 'local:json'
 
-    testCompile 'localTest:commons-io:1.4'
-    testCompile 'localTest:commons-logging:1.1.1'
-    testCompile 'localTest:javassist:3.17.1-GA'
-    testCompile 'localTest:mockito-all:1.8.5'
-    testCompile 'localTest:powermock-mockito:1.4.9-full'
-    
+dependencies {
+    compile group: 'commons-httpclient', name: 'commons-httpclient', version: '3.1'
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.7'
+    compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9+'
+    compile group: 'org.json', name: 'json', version: '20090211'
+
+    testCompile group: 'commons-io', name: 'commons-io', version: '1.4'
+    testCompile group: 'commons-logging', name: 'commons-logging', version: '1.+'
+    testCompile group: 'org.javassist', name: 'javassist', version: '3.+'
     testCompile group: 'junit', name: 'junit', version: '4.+'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '1.+'
+    testCompile group: 'org.powermock', name: 'powermock-api-mockito', version: '1.+'
+    testCompile group: 'org.powermock', name: 'powermock-module-junit4', version: '1.+'
 }

@@ -63,12 +63,14 @@ public class ChatterTools {
     }
 
     /**
-     * <p>Proxy method for {@link ChatterTools#execute(HttpMethod)}.</p>
+     * <p>Currently a proxy method for {@link HttpClient#executeMethod(HttpMethod)}.</p>
+     * 
      * <p>Will use a default {@link HttpClient} to execute the {@link HttpMethod} provided.</p>
      * 
-     * <p>TODO: Probably needs proxy handling.</p>
+     * <p><strong>NOTE</strong>: If you need proxy handling, use {@link #setHttpClient(HttpClient)} to set one with the
+     * correct proxy configured.</p>
      * 
-     * @see ChatterTools#execute(HttpMethod)
+     * @see HttpClient#executeMethod(HttpMethod)
      * @param method
      * @throws HttpException
      * @throws IOException

@@ -65,12 +65,17 @@ public class FindUserCommand implements ChatterCommand {
     /**
      * <p>Returns the username.</p>
      * 
-     * @return
+     * @return String username
      */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * <p>Returns the URI prefix used to search for users.</p>
+     * 
+     * @return String URI
+     */
     @Override
     public String getURI() {
         return URI + username;
