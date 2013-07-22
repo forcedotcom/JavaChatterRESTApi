@@ -6,19 +6,13 @@ Libraries
 license: Apache License (V2.0)
 website: https://hc.apache.org/httpclient-3.x/
 
-- commons-codec (required by commons-httpclient)
-license: Apache License (V2.0)
-website: https://commons.apache.org/codec/
-
 - Jackson
 license: Apache License (V2.0)
 website: http://jackson.codehaus.org/
 
-- JSON
-file: json.jar 
-license: See http://www.json.org/license.html
-website: http://json.org/
-
+- commons-codec (required by commons-httpclient)
+license: Apache License (V2.0)
+website: https://commons.apache.org/codec/
 
 Libraries used for testing
 ==========================
@@ -27,14 +21,6 @@ These are not need at runtime, and are only used for unittests and integration t
 - commons-io
 license: Apache License (V2.0)
 website: https://commons.apache.org/io/
-
-- commons-logging (required by commons-io)
-license: Apache License (V2.0)
-website: https://commons.apache.org/logging/
-
-- javassist
-license: MOZILLA PUBLIC LICENSE Version 1.1
-website: http://sourceforge.net/projects/jboss/files/Javassist/3.17.1-GA/
 
 - jUnit4
 license: Common Public License - v 1.0 (http://junit.sourceforge.net/cpl-v10.html)
@@ -47,3 +33,11 @@ website: https://code.google.com/p/mockito/
 - PowerMockito
 license: Apache License (V2.0)
 website: https://code.google.com/p/powermock/
+
+- commons-logging (required by commons-io)
+license: Apache License (V2.0)
+website: https://commons.apache.org/logging/
+
+- javassist  (required by PowerMockito)
+license: MOZILLA PUBLIC LICENSE Version 1.1
+website: http://sourceforge.net/projects/jboss/files/Javassist/3.17.1-GA/

@@ -47,7 +47,7 @@ public class AuthentificationMethodTest {
     public void testProcessResponse() throws AuthenticationException {
         AuthentificationMethod auth = new UsernamePasswordAuthentication(null);
 
-        String response = "{ access_token : 'test' }";
+        String response = "{ \"access_token\" : \"test\" }";
         ChatterAuthToken token = auth.processResponse(response);
 
         assertEquals("test", token.getAccessToken());

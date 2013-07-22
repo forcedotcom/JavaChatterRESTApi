@@ -61,7 +61,7 @@ public class ClientSecretTest {
 
         HttpClient mockHttpClient = mock(HttpClient.class);
         when(mockHttpClient.executeMethod(any(PostMethod.class))).thenAnswer(
-            new ExecuteMethodAnswer("{access_token : 'abc' }"));
+            new ExecuteMethodAnswer("{\"access_token\" : \"abc\" }"));
 
         auth.setHttpClient(mockHttpClient);
 

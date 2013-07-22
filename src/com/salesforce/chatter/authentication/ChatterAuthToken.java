@@ -34,10 +34,18 @@ package com.salesforce.chatter.authentication;
  */
 public class ChatterAuthToken {
 
-    private final String accessToken;
+    private String accessToken;
 
     public ChatterAuthToken(String accessToken) {
         this.accessToken = accessToken;
+    }
+
+    /**
+	 * <p>This constructor is mostly used by bean-like structures (currently the
+	 * JSON parser uses this).</p>
+	 */
+    public ChatterAuthToken() {
+    	
     }
 
     public String getAccessToken() {

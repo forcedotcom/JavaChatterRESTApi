@@ -28,8 +28,10 @@ package com.salesforce.chatter.authentication.methods;
 import java.io.IOException;
 
 import org.apache.commons.httpclient.HttpClient;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.PropertyNamingStrategy;
 
 import com.salesforce.chatter.authentication.AuthenticationException;
 import com.salesforce.chatter.authentication.ChatterAuthToken;
@@ -47,6 +49,11 @@ public abstract class AuthentificationMethod {
      * <p>This URL is where the default Salesforce.com authentication is performed (regardless of environment).</p>
      */
     public final static String ENVIRONMENT = "https://login.salesforce.com/services/oauth2/token";
+
+	private final static ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
+	static {
+		mapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+	}
 
     private HttpClient client = new HttpClient();
 
@@ -80,16 +87,21 @@ public abstract class AuthentificationMethod {
      * 
      * @param response The body of the Salesforce.com API. A JSON string is expected, and the "access_token" is
      *        extracted and used for the {@link ChatterAuthToken}
-     * @throws AuthenticationException This is a wrapped exception, and contains a {@link JSONException} as its cause
+     * @return A {@link ChatterAuthToken} is successful, or null if the response does not correspond to an access token
+     * @throws AuthenticationException This is a wrapped exception, and will most likely contain either 
+     *         {@link JsonParseException}, {@link JsonMappingException} or {@link IOException} as its cause
      */
     // @formatter:on
     protected ChatterAuthToken processResponse(String response) throws AuthenticationException {
         try {
-            JSONObject json = new JSONObject(response);
-            return new ChatterAuthToken(json.getString("access_token"));
-        } catch (JSONException e) {
+        	return mapper.readValue(response, ChatterAuthToken.class);
+        } catch (JsonParseException e) {
             throw new AuthenticationException(e);
-        }
+		} catch (JsonMappingException e) {
+            throw new AuthenticationException(e);
+		} catch (IOException e) {
+            throw new AuthenticationException(e);
+		}
     }
 
     /**
