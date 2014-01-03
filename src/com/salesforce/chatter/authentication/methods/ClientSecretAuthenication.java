@@ -26,7 +26,6 @@
 package com.salesforce.chatter.authentication.methods;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
@@ -62,9 +61,9 @@ public class ClientSecretAuthenication extends AuthentificationMethod {
      * @throws AuthenticationException
      */
     public ChatterAuthToken authenticate() throws IOException, UnauthenticatedSessionException, AuthenticationException {
-        String clientId = URLEncoder.encode(chatterData.getClientKey(), "UTF-8");
+        String clientId = chatterData.getClientKey();
         String clientSecret = chatterData.getClientSecret();
-        String clientRedirect = URLEncoder.encode(chatterData.getClientCallback(), "UTF-8");
+        String clientRedirect = chatterData.getClientCallback();
         String clientCode = this.clientCode;
 
         if (null == clientCode && null != chatterData.getClientCode()) {
@@ -76,7 +75,7 @@ public class ClientSecretAuthenication extends AuthentificationMethod {
         NameValuePair[] data = { new NameValuePair("grant_type", "authorization_code"),
             new NameValuePair("client_id", clientId), new NameValuePair("client_secret", clientSecret),
             new NameValuePair("redirect_uri", clientRedirect), new NameValuePair("code", clientCode) };
-
+        
         post.setRequestBody(data);
         int statusCode = getHttpClient().executeMethod(post);
         if (statusCode == HttpStatus.SC_OK) {
