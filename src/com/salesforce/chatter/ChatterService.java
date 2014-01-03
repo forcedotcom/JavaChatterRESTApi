@@ -138,7 +138,7 @@ public class ChatterService {
      * @throws UnauthenticatedSessionException thrown if the credentials are incorrect.</p>
      * @throws AuthenticationException
      */
-    public void executeCommand(ChatterCommand command, Message message) throws IOException,
+    public HttpMethod executeCommand(ChatterCommand command, Message message) throws IOException,
         UnauthenticatedSessionException, AuthenticationException {
         if (!authenticated) {
             authenticateSession();
@@ -151,6 +151,7 @@ public class ChatterService {
         method = tools.addHeaders(method, authToken);
 
         tools.executeMethod(method);
+        return method;
     }
 
     /**
