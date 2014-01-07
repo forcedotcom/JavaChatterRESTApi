@@ -138,7 +138,7 @@ public class ChatterService {
      * @throws UnauthenticatedSessionException thrown if the credentials are incorrect.</p>
      * @throws AuthenticationException
      */
-    public HttpMethod executeCommand(ChatterCommand command, Message message) throws IOException,
+    public ChatterResponse executeCommand(ChatterCommand command, Message message) throws IOException,
         UnauthenticatedSessionException, AuthenticationException {
         if (!authenticated) {
             authenticateSession();
@@ -151,7 +151,7 @@ public class ChatterService {
         method = tools.addHeaders(method, authToken);
 
         tools.executeMethod(method);
-        return method;
+        return new ChatterResponse(method);
     }
 
     /**
@@ -161,15 +161,15 @@ public class ChatterService {
      * 
      * <p>The return value will contain the status code and return header/body.</p>
      * 
-     * <p>The HttpMethod's response body will most likely be JSON.</p>
+     * <p>The ChatterResponse body will most likely be JSON.</p>
      * 
      * @param command Any command
-     * @return The HttpMethod (GET) that was used during the request.
+     * @return The ChatterResponse from the API.
      * @throws IOException Thrown if anything goes wrong communicated with the Salesforce.com API.</p>
      * @throws UnauthenticatedSessionException thrown if the credentials are incorrect.</p>
      * @throws AuthenticationException
      */
-    public HttpMethod executeCommand(ChatterCommand command) throws IOException,
+    public ChatterResponse executeCommand(ChatterCommand command) throws IOException,
         UnauthenticatedSessionException, AuthenticationException {
         if (!authenticated) {
             authenticateSession();
@@ -180,7 +180,7 @@ public class ChatterService {
         method = tools.addHeaders(method, authToken);
 
         tools.executeMethod(method);
-        return method;
+        return new ChatterResponse(method);
     }
 
     /**
