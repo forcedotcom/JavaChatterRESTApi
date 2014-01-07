@@ -36,7 +36,7 @@ import com.salesforce.chatter.authentication.ChatterAuthToken;
 import com.salesforce.chatter.authentication.IChatterData;
 import com.salesforce.chatter.authentication.UnauthenticatedSessionException;
 
-public class ClientSecretAuthenication extends AuthentificationMethod {
+public class ClientSecretAuthentication extends AuthentificationMethod {
 
     private final IChatterData chatterData;
     private final String clientCode;
@@ -46,7 +46,7 @@ public class ClientSecretAuthenication extends AuthentificationMethod {
      * @param chatterData
      * @param clientCode If null, the clientCode from chatterData is used
      */
-    public ClientSecretAuthenication(IChatterData chatterData, String clientCode) {
+    public ClientSecretAuthentication(IChatterData chatterData, String clientCode) {
         this.chatterData = chatterData;
         this.clientCode = clientCode;
     }

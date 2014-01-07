@@ -28,7 +28,7 @@ package com.salesforce.chatter.authentication;
 import java.io.IOException;
 
 import com.salesforce.chatter.authentication.methods.AuthentificationMethod;
-import com.salesforce.chatter.authentication.methods.ClientSecretAuthenication;
+import com.salesforce.chatter.authentication.methods.ClientSecretAuthentication;
 import com.salesforce.chatter.authentication.methods.InteractiveAuthentication;
 import com.salesforce.chatter.authentication.methods.RefreshTokenAuthentication;
 import com.salesforce.chatter.authentication.methods.UsernamePasswordAuthentication;
@@ -72,7 +72,7 @@ public class ChatterAuthenticate {
         case INTERACTIVE:
             return new InteractiveAuthentication(chatterData);
         case CLIENT_SECRET:
-            return new ClientSecretAuthenication(chatterData, null);
+            return new ClientSecretAuthentication(chatterData, null);
         case REFRESH_TOKEN:
             return new RefreshTokenAuthentication(chatterData);
         default:

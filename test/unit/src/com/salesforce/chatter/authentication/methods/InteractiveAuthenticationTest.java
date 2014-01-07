@@ -56,9 +56,9 @@ public class InteractiveAuthenticationTest {
             String validVerificationCode = "aPrxb0v8x4SoqfmZmKMRPKgxoKDEL5d5ZdPaYVxdpVSywTCIFBw_cfpyNB3Whit5GYWZhwzI7Q==";
             InputStream in = IOUtils.toInputStream(validVerificationCode);
 
-            ClientSecretAuthenication auth2 = mock(ClientSecretAuthenication.class);
+            ClientSecretAuthentication auth2 = mock(ClientSecretAuthentication.class);
             when(auth2.authenticate()).thenReturn(new ChatterAuthToken("abc"));
-            PowerMockito.whenNew(ClientSecretAuthenication.class).withArguments(any(), any()).thenReturn(auth2);
+            PowerMockito.whenNew(ClientSecretAuthentication.class).withArguments(any(), any()).thenReturn(auth2);
 
             System.setIn(in);
 
