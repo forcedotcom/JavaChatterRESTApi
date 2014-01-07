@@ -38,6 +38,12 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 public class ChatterAuthToken {
 
     private String accessToken;
+    private String id;
+    private String issuedAt;
+    private String scope;
+    private String refreshToken;
+    private String instanceUrl;
+    private String signature;
 
     public ChatterAuthToken(String accessToken) {
         this.accessToken = accessToken;
@@ -54,4 +60,28 @@ public class ChatterAuthToken {
     public String getAccessToken() {
         return accessToken;
     }
+
+	public String getId() {
+		return id;
+	}
+
+	public String getIssuedAt() {
+		return issuedAt;
+	}
+
+	public String getScope() {
+		return scope;
+	}
+
+	public String getRefreshToken() {
+		return refreshToken;
+	}
+
+	public String getInstanceUrl() {
+		return instanceUrl;
+	}
+
+	public String getSignature() {
+		return signature;
+	}
 }
