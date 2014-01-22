@@ -38,7 +38,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
 
 import com.salesforce.chatter.authentication.methods.AuthentificationMethod;
-import com.salesforce.chatter.authentication.methods.ClientSecretAuthenication;
+import com.salesforce.chatter.authentication.methods.ClientSecretAuthentication;
 import com.salesforce.chatter.authentication.methods.InteractiveAuthentication;
 import com.salesforce.chatter.authentication.methods.RefreshTokenAuthentication;
 import com.salesforce.chatter.authentication.methods.UsernamePasswordAuthentication;
@@ -64,7 +64,7 @@ public class ChatterAuthenticateTest {
 
         when(chatterData.getAuthMethod()).thenReturn(ChatterAuthMethod.CLIENT_SECRET);
         method = auth.getAuthentificationMethod(chatterData);
-        assertEquals(ClientSecretAuthenication.class, method.getClass());
+        assertEquals(ClientSecretAuthentication.class, method.getClass());
 
         when(chatterData.getAuthMethod()).thenReturn(ChatterAuthMethod.REFRESH_TOKEN);
         method = auth.getAuthentificationMethod(chatterData);

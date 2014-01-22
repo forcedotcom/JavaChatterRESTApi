@@ -25,6 +25,8 @@
  ******************************************************************************/
 package com.salesforce.chatter.authentication;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 /**
  * <p>Used as a placeholder for the access token required to access the Salesforce.com APIs.</p>
  * 
@@ -32,9 +34,16 @@ package com.salesforce.chatter.authentication;
  * @since 1.0
  * 
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ChatterAuthToken {
 
     private String accessToken;
+    private String id;
+    private String issuedAt;
+    private String scope;
+    private String refreshToken;
+    private String instanceUrl;
+    private String signature;
 
     public ChatterAuthToken(String accessToken) {
         this.accessToken = accessToken;
@@ -51,4 +60,28 @@ public class ChatterAuthToken {
     public String getAccessToken() {
         return accessToken;
     }
+
+	public String getId() {
+		return id;
+	}
+
+	public String getIssuedAt() {
+		return issuedAt;
+	}
+
+	public String getScope() {
+		return scope;
+	}
+
+	public String getRefreshToken() {
+		return refreshToken;
+	}
+
+	public String getInstanceUrl() {
+		return instanceUrl;
+	}
+
+	public String getSignature() {
+		return signature;
+	}
 }

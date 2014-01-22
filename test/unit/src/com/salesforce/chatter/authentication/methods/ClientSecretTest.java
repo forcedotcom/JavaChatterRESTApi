@@ -57,7 +57,7 @@ public class ClientSecretTest {
         AuthenticationException {
         IChatterData data = getMockedChatterData();
 
-        ClientSecretAuthenication auth = new ClientSecretAuthenication(data, "");
+        ClientSecretAuthentication auth = new ClientSecretAuthentication(data, "");
 
         HttpClient mockHttpClient = mock(HttpClient.class);
         when(mockHttpClient.executeMethod(any(PostMethod.class))).thenAnswer(
@@ -74,7 +74,7 @@ public class ClientSecretTest {
         AuthenticationException {
         IChatterData data = getMockedChatterData();
 
-        ClientSecretAuthenication auth = new ClientSecretAuthenication(data, null);
+        ClientSecretAuthentication auth = new ClientSecretAuthentication(data, null);
 
         HttpClient mockHttpClient = mock(HttpClient.class);
         when(mockHttpClient.executeMethod(any(PostMethod.class))).thenAnswer(

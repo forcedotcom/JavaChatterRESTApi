@@ -35,7 +35,7 @@ import com.salesforce.chatter.authentication.IChatterData;
 import com.salesforce.chatter.authentication.UnauthenticatedSessionException;
 
 /**
- * <p>Asks the user to get the verificationCode (clientSecret) and use {@link ClientSecretAuthenication} to complete the
+ * <p>Asks the user to get the verificationCode (clientSecret) and use {@link ClientSecretAuthentication} to complete the
  * authentication.</p>
  * 
  * @author jroel
@@ -81,7 +81,7 @@ public class InteractiveAuthentication extends AuthentificationMethod {
 
             if (isVerificationCode(verificationCode)) {
                 // Now that we have that, we move on to get the refresh & access tokens
-                return new ClientSecretAuthenication(chatterData, verificationCode).authenticate();
+                return new ClientSecretAuthentication(chatterData, verificationCode).authenticate();
             } else {
                 System.err.println("Didn't receive a valid Verification code, please try again...");
 

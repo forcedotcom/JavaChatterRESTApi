@@ -28,17 +28,16 @@ package com.salesforce.chatter;
 import java.io.IOException;
 import java.net.URLEncoder;
 
-import org.apache.commons.httpclient.HttpMethod;
 import org.junit.Test;
 
 import com.salesforce.chatter.authentication.AuthenticationException;
 import com.salesforce.chatter.authentication.UnauthenticatedSessionException;
 import com.salesforce.chatter.commands.ChatterCommand;
+import com.salesforce.chatter.commands.FindUserCommand;
 import com.salesforce.chatter.commands.PostToGroupCommand;
 import com.salesforce.chatter.commands.PostToProfileCommand;
 import com.salesforce.chatter.commands.PostToStatusCommand;
 import com.salesforce.chatter.commands.PostToThreadCommand;
-import com.salesforce.chatter.commands.FindUserCommand;
 import com.salesforce.chatter.commands.SOQLCommand;
 import com.salesforce.chatter.message.LinkSegment;
 import com.salesforce.chatter.message.MentionSegment;
@@ -61,7 +60,7 @@ import com.salesforce.chatter.message.TextSegment;
  */
 public class TestChatterPost {
 
-    private final String SOME_USER_ID = "005A0000USER0ID";
+	private final String SOME_USER_ID = "005A0000USER0ID";
     private final String SOME_GROUP_ID = "0F9F000GROUP0ID";
 
     /**
@@ -146,7 +145,7 @@ public class TestChatterPost {
         ChatterCommand cmd = new FindUserCommand(search);
 
         ChatterService service = new ChatterService(new ChatterData());
-        HttpMethod result = service.executeCommand(cmd);
+        ChatterResponse result = service.executeCommand(cmd);
 
         // headers
         System.out.println(result.getResponseBodyAsString());
@@ -161,7 +160,7 @@ public class TestChatterPost {
         ChatterCommand cmd = new SOQLCommand(command);
 
         ChatterService service = new ChatterService(new ChatterData());
-        HttpMethod result = service.executeCommand(cmd);
+        ChatterResponse result = service.executeCommand(cmd);
 
         // headers
         System.out.println(result.getResponseBodyAsString());
