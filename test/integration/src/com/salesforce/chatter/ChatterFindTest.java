@@ -48,7 +48,7 @@ public class ChatterFindTest {
 
     @Test
     public void testUpdateStatus() throws IOException, UnauthenticatedSessionException, AuthenticationException {
-        ChatterCommand cmd = new FindUserCommand("Full name of some user");
+        ChatterCommand cmd = new FindUserCommand("Jasper+Roel");
         Message msg = new Message();
 
         ChatterService service = new ChatterService(new ChatterData());

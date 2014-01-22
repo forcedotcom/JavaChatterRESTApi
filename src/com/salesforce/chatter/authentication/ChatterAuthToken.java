@@ -50,38 +50,38 @@ public class ChatterAuthToken {
     }
 
     /**
-	 * <p>This constructor is mostly used by bean-like structures (currently the
-	 * JSON parser uses this).</p>
-	 */
+     * <p>This constructor is mostly used by bean-like structures (currently the
+     * JSON parser uses this).</p>
+     */
     public ChatterAuthToken() {
-    	
+
     }
 
     public String getAccessToken() {
         return accessToken;
     }
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public String getIssuedAt() {
-		return issuedAt;
-	}
+    public String getIssuedAt() {
+        return issuedAt;
+    }
 
-	public String getScope() {
-		return scope;
-	}
+    public String getScope() {
+        return scope;
+    }
 
-	public String getRefreshToken() {
-		return refreshToken;
-	}
+    public String getRefreshToken() {
+        return refreshToken;
+    }
 
-	public String getInstanceUrl() {
-		return instanceUrl;
-	}
+    public String getInstanceUrl() {
+        return instanceUrl;
+    }
 
-	public String getSignature() {
-		return signature;
-	}
+    public String getSignature() {
+        return signature;
+    }
 }

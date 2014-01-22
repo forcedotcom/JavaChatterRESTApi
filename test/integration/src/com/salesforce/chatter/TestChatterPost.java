@@ -60,7 +60,7 @@ import com.salesforce.chatter.message.TextSegment;
  */
 public class TestChatterPost {
 
-	private final String SOME_USER_ID = "005A0000USER0ID";
+    private final String SOME_USER_ID = "005A0000USER0ID";
     private final String SOME_GROUP_ID = "0F9F000GROUP0ID";
 
     /**

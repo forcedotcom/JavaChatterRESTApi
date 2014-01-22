@@ -25,10 +25,26 @@
  ******************************************************************************/
 package com.salesforce.chatter.authentication;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
+import java.io.IOException;
+
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.PropertyNamingStrategy;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import com.salesforce.chatter.authentication.methods.AuthentificationMethod;
 
 public class ChatterAuthTokenTest {
+
+    /**
+     * <p>This is copied straight out of {@link AuthentificationMethod}.</p>
+     */
+    private final static ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
+    static {
+        mapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+    }
 
     @Test
     public void testNullToken() {
@@ -41,5 +57,21 @@ public class ChatterAuthTokenTest {
         String input = "TEST";
         ChatterAuthToken token = new ChatterAuthToken(input);
         assertEquals(input, token.getAccessToken());
+    }
+
+    @Test
+    public void testJsonAndGetters() throws IOException {
+        ChatterAuthToken token = mapper.readValue(getTestResponse(), ChatterAuthToken.class);
+        assertEquals("https://login.salesforce.com/id/ID", token.getId());
+        assertEquals("1390419152257", token.getIssuedAt());
+        assertEquals("scope", token.getScope());
+        assertEquals("refresh_token", token.getRefreshToken());
+        assertEquals("https://naX.salesforce.com", token.getInstanceUrl());
+        assertEquals("signature", token.getSignature());
+
+    }
+
+    private String getTestResponse() {
+        return "{\"id\":\"https://login.salesforce.com/id/ID\",\"issued_at\":\"1390419152257\",\"instance_url\":\"https://naX.salesforce.com\",\"signature\":\"signature\",\"access_token\":\"access_token\",\"scope\":\"scope\",\"refresh_token\":\"refresh_token\"}";
     }
 }

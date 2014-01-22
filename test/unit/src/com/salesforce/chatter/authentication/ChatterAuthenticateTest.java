@@ -93,8 +93,8 @@ public class ChatterAuthenticateTest {
      * 
      * @throws AuthenticationException
      */
-//    @Test(expected = AuthenticationException.class)
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test(expected = AuthenticationException.class)
+//    @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void test() throws AuthenticationException {
         ChatterAuthMethod C = PowerMockito.mock(ChatterAuthMethod.class);
         Whitebox.setInternalState(C, "name", "BAD");
