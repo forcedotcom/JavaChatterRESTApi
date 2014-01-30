@@ -46,7 +46,7 @@ public class ChatterDataGeneric implements IChatterData {
 
     private final String clientKey;
     private final String clientSecret;
-	private final String authenticationEnvironment = "https://login.salesforce.com";
+	private final String environment = "PRODUCTION";
 
     /**
      * 
@@ -149,6 +149,6 @@ public class ChatterDataGeneric implements IChatterData {
 
 	@Override
 	public String getEnvironment() {
-		return authenticationEnvironment;
+		return environment;
 	}
 }
