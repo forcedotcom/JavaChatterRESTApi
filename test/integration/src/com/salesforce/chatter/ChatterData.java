@@ -49,6 +49,7 @@ public class ChatterData implements IChatterData {
 
     private final String clientKey = "TheClientKey";
     private final String clientSecret = "The_numeric_CLientSecret";
+	private final String environment = "PRODUCTION";
 
     @Override
     public String getApiVersion() {
@@ -99,4 +100,9 @@ public class ChatterData implements IChatterData {
     public String getClientCallback() {
         return null;
     }
+
+	@Override
+	public String getEnvironment() {
+		return environment;
+	}
 }

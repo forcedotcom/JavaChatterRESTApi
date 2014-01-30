@@ -46,9 +46,14 @@ public abstract class AuthentificationMethod {
     public final static String VERIFICATION_URL = "https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=__CLIENTID__&redirect_uri=__REDIRECTURI__";
 
     /**
-     * <p>This URL is where the default Salesforce.com authentication is performed (regardless of environment).</p>
+     * <p>This URL is where the default Salesforce.com authentication is performed.</p>
      */
-    public final static String ENVIRONMENT = "https://login.salesforce.com/services/oauth2/token";
+    public final static String PRODUCTION_AUTHENTICATION_URL = "https://login.salesforce.com/services/oauth2/token";
+    
+    /**
+     * <p>This URL is where the Salesforce.com authentication is performed for test environments.</p>
+     */
+    public final static String TEST_AUTHENTICATION_URL = "https://test.salesforce.com/services/oauth2/token";
 
 	private final static ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
 	static {

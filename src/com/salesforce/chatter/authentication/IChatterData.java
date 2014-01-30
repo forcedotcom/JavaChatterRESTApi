@@ -64,4 +64,12 @@ public interface IChatterData {
     public String getPassword();
 
     public String getClientCallback();
+    
+	/**
+	 * The Salesforce.com environment in which to perform authentication.
+	 * Either PRODUCTION or TEST.
+	 * 
+	 * @return
+	 */
+    public String getEnvironment();
 }

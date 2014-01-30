@@ -70,7 +70,8 @@ public class ClientSecretAuthentication extends AuthentificationMethod {
             clientCode = chatterData.getClientCode();
         }
 
-        PostMethod post = new PostMethod(ENVIRONMENT);
+        String authenticationUrl = "TEST".equalsIgnoreCase(chatterData.getEnvironment()) ? TEST_AUTHENTICATION_URL : PRODUCTION_AUTHENTICATION_URL;
+        PostMethod post = new PostMethod(authenticationUrl);
 
         NameValuePair[] data = { new NameValuePair("grant_type", "authorization_code"),
             new NameValuePair("client_id", clientId), new NameValuePair("client_secret", clientSecret),
