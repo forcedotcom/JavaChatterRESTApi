@@ -81,10 +81,13 @@ public class ChatterCommands {
         }
 
         Map<String, List<Map<String, String>>> messageSegments = new HashMap<String, List<Map<String, String>>>();
-        Map<String, Map<String, List<Map<String, String>>>> json = new HashMap<String, Map<String, List<Map<String, String>>>>();
+        Map<String, Object> json = new HashMap<String, Object>();
 
         messageSegments.put("messageSegments", segments);
         json.put("body", messageSegments);
+        if (message.hasAttachment()) {
+        	json.put("attachment", message.getAttachment());
+        }
 
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(json);

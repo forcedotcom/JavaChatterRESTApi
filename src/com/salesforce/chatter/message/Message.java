@@ -28,9 +28,12 @@ package com.salesforce.chatter.message;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.salesforce.chatter.attachment.Attachment;
+
 public class Message {
 
     private List<MessageSegment> segments = new ArrayList<MessageSegment>();
+	private Attachment attachment;
 
     public void addSegment(MessageSegment segment) {
         segments.add(segment);
@@ -39,4 +42,16 @@ public class Message {
     public List<MessageSegment> getSegments() {
         return segments;
     }
+
+	public void addAttachment(Attachment attachment) {
+		this.attachment = attachment;
+	}
+	
+	public Attachment getAttachment() {
+		return attachment;
+	}
+
+	public boolean hasAttachment() {
+		return attachment != null;
+	}
 }
