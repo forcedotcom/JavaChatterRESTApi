@@ -23,51 +23,52 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
-package com.salesforce.chatter.commands;
+package com.salesforce.chatter;
 
-import java.security.InvalidParameterException;
+import static org.junit.Assert.assertEquals;
+
+import java.io.IOException;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
-public class PostToGroupCommandTest {
+import com.salesforce.chatter.authentication.AuthenticationException;
+import com.salesforce.chatter.authentication.UnauthenticatedSessionException;
+import com.salesforce.chatter.commands.ChatterCommand;
+import com.salesforce.chatter.commands.PostToGroupCommand;
+import com.salesforce.chatter.message.LinkSegment;
+import com.salesforce.chatter.message.Message;
+import com.salesforce.chatter.message.TextSegment;
+
+/**
+ * <p>These are integration tests to validate posting to a group in a community.</p>
+ * 
+ * <p>These tests depend on 3 things to succeed:<ul>
+ * <li>A valid GROUP_ID</li>
+ * <li>A valid COMMUNITY_ID</li>
+ * <li>The {@link ChatterData} object to contain valid data</li>
+ * </ul>
+ * </p>
+ * 
+ * @author Eric Broyles
+ * @since 1.0.3
+ */
+public class TestChatterPostToCommunity {
+
+    private static final String GROUP_ID = "0F9e00000008UnA";
+	private static final String COMMUNITY_ID = "0ACeCOMMUNITY13FCC";
 
     @Test
-    public void testNullConstructor() {
-        try {
-            new PostToGroupCommand(null);
-            fail("Null as a parameter should not be accepted.");
-        } catch (InvalidParameterException ipe) {
-            // This is expected.
-            return;
-        }
-        fail();
-    }
+    public void testPostOnGroup() throws IOException, UnauthenticatedSessionException, AuthenticationException {
+        Message msg = new Message();
+        msg.addSegment(new TextSegment("sendChatter "));
+        msg.addSegment(new TextSegment(" done!"));
+        msg.addSegment(new LinkSegment("www.salesforce.com"));
 
-    @Test
-    public void testConstructor() {
-        try {
-            new PostToGroupCommand("");
-        } catch (InvalidParameterException ipe) {
-            fail("empty String as a parameter should be accepted.");
-        }
+        ChatterCommand cmd = new PostToGroupCommand(GROUP_ID, COMMUNITY_ID);
+        ChatterService service = new ChatterService(new ChatterData());
+        
+        ChatterResponse response = service.executeCommand(cmd, msg);
+        
+        assertEquals("Response status", 201, response.getStatusCode());
     }
-
-    @Test
-    public void testGetters() {
-        String test = "TEST";
-        PostToGroupCommand command = new PostToGroupCommand(test);
-        assertEquals(test, command.getGroupId());
-        assertEquals("/chatter/feeds/record/TEST/feed-items", command.getURI());
-    }
-    
-    @Test
-    public void testCommunityPost() {
-    	String groupId = "groupId";
-    	String communityId = "communityId";
-    	PostToGroupCommand command = new PostToGroupCommand(groupId, communityId);
-    	assertEquals(groupId, command.getGroupId());
-    	assertEquals("/connect/communities/communityId/chatter/feeds/record/groupId/feed-items", command.getURI());
-    }
-
 }

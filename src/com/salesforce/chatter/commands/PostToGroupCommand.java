@@ -29,8 +29,13 @@ import java.security.InvalidParameterException;
 
 public class PostToGroupCommand implements ChatterCommand {
     private final String groupPostURI = "/chatter/feeds/record/__recordId__/feed-items";
+    
+    private final String communityGroupPostURI = "/connect/communities/__communityId__/chatter/feeds/record/__recordId__/feed-items";
 
     private final String groupId;
+
+	private String communityId = null;
+	
 
     public PostToGroupCommand(String groupId) {
         if (groupId == null) {
@@ -40,12 +45,33 @@ public class PostToGroupCommand implements ChatterCommand {
         this.groupId = groupId;
     }
 
-    public String getGroupId() {
+    public PostToGroupCommand(String groupId, String communityId) {
+    	if (groupId == null) {
+            throw new InvalidParameterException(
+                "Unable to post to a group without specifying the group in question. Please pass a valid groupId.");
+        }
+		if (communityId == null) {
+			throw new InvalidParameterException(
+				"Unable to post to a community group without specifying the community in question. Please pass a valid communityId.");
+		}
+        this.groupId = groupId;
+        this.communityId = communityId;
+	}
+
+	public String getGroupId() {
         return groupId;
     }
 
-    @Override
+    public String getCommunityId() {
+		return communityId;
+	}
+
+	@Override
     public String getURI() {
-        return groupPostURI.replace("__recordId__", groupId);
+		if (getCommunityId() != null) {
+			return communityGroupPostURI.replace("__recordId__", groupId).replace("__communityId__", communityId);
+		} else {
+			return groupPostURI.replace("__recordId__", groupId);
+		}
     }
 }
