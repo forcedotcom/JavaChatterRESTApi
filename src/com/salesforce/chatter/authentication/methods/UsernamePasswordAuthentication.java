@@ -60,7 +60,8 @@ public class UsernamePasswordAuthentication extends AuthentificationMethod {
         String username = chatterData.getUsername();
         String password = chatterData.getPassword();
 
-        PostMethod post = new PostMethod(ENVIRONMENT);
+        String authenticationUrl = "TEST".equalsIgnoreCase(chatterData.getEnvironment()) ? TEST_AUTHENTICATION_URL : PRODUCTION_AUTHENTICATION_URL;
+        PostMethod post = new PostMethod(authenticationUrl);
 
         NameValuePair[] data = { new NameValuePair("grant_type", "password"), new NameValuePair("client_id", clientId),
             new NameValuePair("client_secret", clientSecret), new NameValuePair("username", username),

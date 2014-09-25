@@ -46,6 +46,7 @@ public class ChatterDataGeneric implements IChatterData {
 
     private final String clientKey;
     private final String clientSecret;
+	private final String environment = "PRODUCTION";
 
     /**
      * 
@@ -145,4 +146,9 @@ public class ChatterDataGeneric implements IChatterData {
     public String getClientCallback() {
         return null;
     }
+
+	@Override
+	public String getEnvironment() {
+		return environment;
+	}
 }

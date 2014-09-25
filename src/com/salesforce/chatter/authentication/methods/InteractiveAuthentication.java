@@ -44,7 +44,9 @@ import com.salesforce.chatter.authentication.UnauthenticatedSessionException;
  */
 public class InteractiveAuthentication extends AuthentificationMethod {
 
-    private int attempts = 3;
+    private static final String TEST_VERIFICATION_URL = "https://test.salesforce.com/services/oauth2/authorize?response_type=code&client_id=__CLIENTID__&redirect_uri=__REDIRECTURI__";
+
+	private int attempts = 3;
 
     private final IChatterData chatterData;
 
@@ -68,7 +70,7 @@ public class InteractiveAuthentication extends AuthentificationMethod {
         while (keepTrying) {
             // Request this from the user...
             System.out.println("Please visit the following URL and report back the verification code...");
-            String uri = VERIFICATION_URL;
+            String uri = "TEST".equalsIgnoreCase(chatterData.getEnvironment()) ? TEST_VERIFICATION_URL : VERIFICATION_URL;
             uri = uri.replace("__CLIENTID__", chatterData.getClientKey());
             uri = uri.replace("__REDIRECTURI__", chatterData.getClientCallback());
 

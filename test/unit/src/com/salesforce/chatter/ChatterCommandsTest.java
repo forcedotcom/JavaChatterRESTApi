@@ -23,53 +23,38 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
-package com.salesforce.chatter.authentication;
+package com.salesforce.chatter;
 
-/**
- * <p>This is a framework which contains all method needed to perform all the different {@link ChatterAuthMethod}s. Only
- * a subset is needed per method.</p>
- * 
- * <p>So, there is probably room for some abstract classes that only expose the required
- * methods per type, and throw exceptions or return nulls for unneeded methods.</p>
- * 
- * @author jroel
- * @since 1.0
- * 
- */
-public interface IChatterData {
+import static org.junit.Assert.assertEquals;
 
-    /**
-     * @return String Something like "24.0"
-     */
-    public String getApiVersion();
+import org.junit.Test;
 
-    /**
-     * 
-     * @return String Something like "https://na10.salesforce.com"
-     */
-    public String getInstanceUrl();
+import com.salesforce.chatter.attachment.LinkAttachment;
+import com.salesforce.chatter.message.LinkSegment;
+import com.salesforce.chatter.message.Message;
+import com.salesforce.chatter.message.TextSegment;
 
-    public ChatterAuthMethod getAuthMethod();
+public class ChatterCommandsTest {
 
-    public String getRefreshToken();
+	ChatterCommands commandTool = new ChatterCommands();
 
-    public String getClientCode();
+	@Test
+	public void testGetJsonPayloadWithMultipleSegments() throws Exception {
+		Message message = new Message();
+		message.addSegment(new TextSegment("Check out this site! "));
+		message.addSegment(new LinkSegment("http://www.salesforce.com"));
+		
+		assertEquals("{\"body\":{\"messageSegments\":[{\"text\":\"Check out this site! \",\"type\":\"text\"},{\"type\":\"link\",\"url\":\"http://www.salesforce.com\"}]}}", commandTool.getJsonPayload(message));
+	}
 
-    public String getClientKey();
+	@Test
+	public void testGetJsonPayloadWithMultipleSegmentsAndAttachment() throws Exception {
+		Message message = new Message();
+		message.addSegment(new TextSegment("Check out this site! "));
+		message.addSegment(new LinkSegment("http://www.salesforce.com"));
+		message.addAttachment(new LinkAttachment("http://www.salesforce.com", "Salesforce"));
+		
+		assertEquals("{\"body\":{\"messageSegments\":[{\"text\":\"Check out this site! \",\"type\":\"text\"},{\"type\":\"link\",\"url\":\"http://www.salesforce.com\"}]},\"attachment\":{\"attachmentType\":\"Link\",\"url\":\"http://www.salesforce.com\",\"urlName\":\"Salesforce\"}}", commandTool.getJsonPayload(message));
+	}
 
-    public String getClientSecret();
-
-    public String getUsername();
-
-    public String getPassword();
-
-    public String getClientCallback();
-    
-	/**
-	 * The Salesforce.com environment in which to perform authentication.
-	 * Either PRODUCTION or TEST.
-	 * 
-	 * @return
-	 */
-    public String getEnvironment();
 }

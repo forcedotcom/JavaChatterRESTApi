@@ -23,53 +23,66 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
-package com.salesforce.chatter.authentication;
+package com.salesforce.chatter.attachment;
 
 /**
- * <p>This is a framework which contains all method needed to perform all the different {@link ChatterAuthMethod}s. Only
- * a subset is needed per method.</p>
+ * Represents an "Attachment Input: Link" item in the Chatter REST API.
  * 
- * <p>So, there is probably room for some abstract classes that only expose the required
- * methods per type, and throw exceptions or return nulls for unneeded methods.</p>
- * 
- * @author jroel
- * @since 1.0
+ * @author Eric Broyles
+ * @version $Id:$
  * 
  */
-public interface IChatterData {
+public class LinkAttachment extends Attachment {
 
-    /**
-     * @return String Something like "24.0"
-     */
-    public String getApiVersion();
+	private static final String LINK_TYPE = "Link";
+	private String attachmentType = LINK_TYPE;
+	private String url;
+	private String urlName;
 
-    /**
-     * 
-     * @return String Something like "https://na10.salesforce.com"
-     */
-    public String getInstanceUrl();
-
-    public ChatterAuthMethod getAuthMethod();
-
-    public String getRefreshToken();
-
-    public String getClientCode();
-
-    public String getClientKey();
-
-    public String getClientSecret();
-
-    public String getUsername();
-
-    public String getPassword();
-
-    public String getClientCallback();
-    
 	/**
-	 * The Salesforce.com environment in which to perform authentication.
-	 * Either PRODUCTION or TEST.
+	 * Construct a LinkAttachment object for a url with a name.
 	 * 
-	 * @return
+	 * @param url
+	 * @param urlName
 	 */
-    public String getEnvironment();
+	public LinkAttachment(String url, String urlName) {
+		this.url = url;
+		this.urlName = urlName;
+	}
+
+	/**
+	 * Construct a LinkAttachment object for a url. A name is generated from the
+	 * domain name of the URL
+	 * 
+	 * @param url
+	 */
+	public LinkAttachment(String url) {
+		this.url = url;
+	}
+
+	@Override
+	public String getAttachmentType() {
+		return attachmentType;
+	}
+
+	public void setAttachmentType(String attachmentType) {
+		this.attachmentType = attachmentType;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getUrlName() {
+		return urlName;
+	}
+
+	public void setUrlName(String urlName) {
+		this.urlName = urlName;
+	}
+
 }

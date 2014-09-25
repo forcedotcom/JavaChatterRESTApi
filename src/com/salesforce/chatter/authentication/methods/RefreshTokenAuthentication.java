@@ -54,8 +54,8 @@ public class RefreshTokenAuthentication extends AuthentificationMethod {
      */
     @Override
     public ChatterAuthToken authenticate() throws IOException, UnauthenticatedSessionException, AuthenticationException {
-
-        PostMethod post = new PostMethod(ENVIRONMENT);
+    	String authenticationUrl = "TEST".equalsIgnoreCase(chatterData.getEnvironment()) ? TEST_AUTHENTICATION_URL : PRODUCTION_AUTHENTICATION_URL;
+        PostMethod post = new PostMethod(authenticationUrl);
         String clientId = URLEncoder.encode(chatterData.getClientKey(), "UTF-8");
         String clientSecret = URLEncoder.encode(chatterData.getClientSecret(), "UTF-8");
         NameValuePair[] data = { new NameValuePair("grant_type", "refresh_token"),

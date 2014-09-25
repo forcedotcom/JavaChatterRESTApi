@@ -41,12 +41,13 @@ import com.salesforce.chatter.authentication.IChatterData;
 public class ChatterAuthInteractive implements IChatterData {
 
     private final String apiVersion = "24.0";
-    private final String instanceUrl = "https://naX.salesforce.com";
+    private final String instanceUrl = "https://na8.salesforce.com";
 
     private final ChatterAuthMethod authMethod = ChatterAuthMethod.INTERACTIVE;
     private final String clientKey = "3MVG9yZ.WNe6byQDS1oBDJg6vP82qy7w.OVregoIATuJtBxxIxDQmbG9nw8masqSUAsCED6CCNx.3zaWScqph";
     private final String clientSecret = "6830641966138142806";
     private final String clientCallback = "oob";
+	private final String environment = "PRODUCTION";
 
     @Override
     public String getApiVersion() {
@@ -97,4 +98,9 @@ public class ChatterAuthInteractive implements IChatterData {
     public String getPassword() {
         return null;
     }
+
+	@Override
+	public String getEnvironment() {
+		return environment;
+	}
 }
