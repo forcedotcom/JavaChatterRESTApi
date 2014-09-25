@@ -60,14 +60,14 @@ public class PostToGroupCommandTest {
         assertEquals(test, command.getGroupId());
         assertEquals("/chatter/feeds/record/TEST/feed-items", command.getURI());
     }
-    
+
     @Test
     public void testCommunityPost() {
-    	String groupId = "groupId";
-    	String communityId = "communityId";
-    	PostToGroupCommand command = new PostToGroupCommand(groupId, communityId);
-    	assertEquals(groupId, command.getGroupId());
-    	assertEquals("/connect/communities/communityId/chatter/feeds/record/groupId/feed-items", command.getURI());
+        String groupId = "groupId";
+        String communityId = "communityId";
+        PostToGroupCommand command = new PostToGroupCommand(groupId, communityId);
+        assertEquals(groupId, command.getGroupId());
+        assertEquals("/connect/communities/communityId/chatter/feeds/record/groupId/feed-items", command.getURI());
     }
 
 }

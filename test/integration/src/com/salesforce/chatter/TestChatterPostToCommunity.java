@@ -55,7 +55,7 @@ import com.salesforce.chatter.message.TextSegment;
 public class TestChatterPostToCommunity {
 
     private static final String GROUP_ID = "0F9e00000008UnA";
-	private static final String COMMUNITY_ID = "0ACeCOMMUNITY13FCC";
+    private static final String COMMUNITY_ID = "0ACeCOMMUNITY13FCC";
 
     @Test
     public void testPostOnGroup() throws IOException, UnauthenticatedSessionException, AuthenticationException {
@@ -66,9 +66,9 @@ public class TestChatterPostToCommunity {
 
         ChatterCommand cmd = new PostToGroupCommand(GROUP_ID, COMMUNITY_ID);
         ChatterService service = new ChatterService(new ChatterData());
-        
+
         ChatterResponse response = service.executeCommand(cmd, msg);
-        
+
         assertEquals("Response status", 201, response.getStatusCode());
     }
 }
