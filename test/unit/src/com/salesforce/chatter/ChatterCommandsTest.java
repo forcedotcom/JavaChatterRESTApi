@@ -27,12 +27,15 @@ package com.salesforce.chatter;
 
 import static org.junit.Assert.assertEquals;
 
+import com.salesforce.chatter.attachment.ImageAttachment;
 import org.junit.Test;
 
 import com.salesforce.chatter.attachment.LinkAttachment;
 import com.salesforce.chatter.message.LinkSegment;
 import com.salesforce.chatter.message.Message;
 import com.salesforce.chatter.message.TextSegment;
+
+import java.io.File;
 
 public class ChatterCommandsTest {
 
@@ -56,5 +59,15 @@ public class ChatterCommandsTest {
 		
 		assertEquals("{\"body\":{\"messageSegments\":[{\"text\":\"Check out this site! \",\"type\":\"text\"},{\"type\":\"link\",\"url\":\"http://www.salesforce.com\"}]},\"attachment\":{\"attachmentType\":\"Link\",\"url\":\"http://www.salesforce.com\",\"urlName\":\"Salesforce\"}}", commandTool.getJsonPayload(message));
 	}
+
+    @Test
+    public void testGetJsonPayloadWithMultipleSegmentsAndImageAttachment() throws Exception {
+        Message message = new Message();
+        message.addSegment(new TextSegment("Check out this site! "));
+        File img = new File("img.png");
+        message.addAttachment(new ImageAttachment("Title", "Description", "image/png", img));
+
+        assertEquals("{\"body\":{\"messageSegments\":[{\"text\":\"Check out this site! \",\"type\":\"text\"},{\"type\":\"link\",\"url\":\"http://www.salesforce.com\"}]},\"attachment\":{\"attachmentType\":\"NewFile\",\"title\":\"Title\",\"description\":\"Description\",\"fileName\":\"img.png\"}}", commandTool.getJsonPayload(message));
+    }
 
 }
