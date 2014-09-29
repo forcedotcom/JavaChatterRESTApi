@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, salesforce.com, inc.
+ * Copyright (c) 2014, salesforce.com, inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided
@@ -31,7 +31,7 @@ import java.io.File;
  * Represents Image attachment for Feed object
  * API reference: Attachment Input: New File Upload
  *
- * @version 1.0
+ * @version 1.1
  * @author Kamil Smuga
  */
 
