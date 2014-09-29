@@ -84,6 +84,9 @@ msg.addSegment(new TextSegment(", check out this website: "));
 msg.addSegment(new LinkSegment("www.salesforce.com"));
 msg.addSegment(new TextSegment(" #salesforce"));
 
+File img = new File("img.png");
+msg.addAttachment(new ImageAttachment("Title", "Description", "image/png", img));
+
 ChatterCommand cmd = new PostToThreadCommand(TEAM_GROUP_ID);
 
 service.executeCommand(cmd, msg);

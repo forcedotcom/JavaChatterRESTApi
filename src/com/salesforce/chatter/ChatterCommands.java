@@ -34,10 +34,15 @@ import java.util.Map;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
+import org.apache.commons.httpclient.methods.multipart.FilePart;
+import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
+import org.apache.commons.httpclient.methods.multipart.Part;
+import org.apache.commons.httpclient.methods.multipart.StringPart;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import com.salesforce.chatter.attachment.ImageAttachment;
 import com.salesforce.chatter.message.Message;
 import com.salesforce.chatter.message.MessageSegment;
 
@@ -47,8 +52,8 @@ public class ChatterCommands {
      * <p>This creates a HttpMethod with the message as its payload. The message should be a properly formatted JSON
      * String (No validation is done on this).</p>
      * 
-     * <p>The message can be easily created using the {@link #getJsonPayload(Message)} method.</p>
-     * 
+     * <p>The message can be easily created using the {@link #getJsonPayload(com.salesforce.chatter.message.Message)} method.</p>
+     *
      * @param uri The full URI which we will post to
      * @param message A properly formatted JSON message. UTF-8 is expected
      * @throws IOException
@@ -61,10 +66,40 @@ public class ChatterCommands {
     }
 
     /**
+     * <p>This creates a HttpMethod with the message as its payload and image attachment. The message should be a properly formatted JSON
+     * String (No validation is done on this).</p>
+     *
+     * <p>The message can be easily created using the {@link #getJsonPayload(Message)} method.</p>
+     *
+     * @param uri The full URI which we will post to
+     * @param message A properly formatted JSON message. UTF-8 is expected
+     * @param image A complete instance of ImageAttachment object
+     * @throws IOException
+     */
+    public HttpMethod getJsonPostForMultipartRequestEntity(String uri, String message, ImageAttachment image) throws IOException {
+        PostMethod post = new PostMethod(uri);
+
+        StringPart bodyPart = new StringPart("json", message);
+        bodyPart.setContentType("application/json");
+
+        FilePart filePart= new FilePart("feedItemFileUpload", image.retrieveObjectFile());
+        filePart.setContentType(image.retrieveContentType());
+
+        Part[] parts = {
+                bodyPart,
+                filePart,
+        };
+
+        post.setRequestEntity(new MultipartRequestEntity(parts, post.getParams()));
+
+        return post;
+    }
+
+    /**
      * <p>Creates a JSON String from the message segments, ready to be consumed by the Salesforce.com API.</p>
-     * 
+     *
      * <p>The result is ready to be consumed by {@link #getJsonPost(String, String)}.</p>
-     * 
+     *
      * @param message The message which should be send to the Salesforce.com API
      * @return A (JSON) String with all the segments embedded
      * @throws JsonGenerationException

@@ -31,6 +31,7 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 
+import com.salesforce.chatter.attachment.ImageAttachment;
 import com.salesforce.chatter.authentication.AuthenticationException;
 import com.salesforce.chatter.authentication.ChatterAuthToken;
 import com.salesforce.chatter.authentication.ChatterAuthenticate;
@@ -117,7 +118,7 @@ public class ChatterService {
     /**
      * <p>This allows the caller to override the {@link HttpClient} implementation used during for all Chatter
      * communication.</p>
-     * 
+     *
      * @param client {@link HttpClient}
      */
     public void setHttpClient(HttpClient client) {
@@ -127,11 +128,11 @@ public class ChatterService {
 
     /**
      * <p>Will send any {@link ChatterCommand} with its associated {@link Message} to the Salesforce API.</p>
-     * 
+     *
      * <p>This is generally used for commands that support a JSON payload that result in a change to the Org.</p>
-     * 
+     *
      * <p>It will be POSTed via the Salesforce API.</p>
-     * 
+     *
      * @param command Any command
      * @param message Any message
      * @throws IOException Thrown if anything goes wrong communicated with the Salesforce.com API.</p>
@@ -139,15 +140,21 @@ public class ChatterService {
      * @throws AuthenticationException
      */
     public ChatterResponse executeCommand(ChatterCommand command, Message message) throws IOException,
-        UnauthenticatedSessionException, AuthenticationException {
+            UnauthenticatedSessionException, AuthenticationException {
         if (!authenticated) {
             authenticateSession();
         }
 
         String uri = tools.getChatterUri(command.getURI());
         String payload = chatterCommands.getJsonPayload(message);
+        HttpMethod method;
+        if (message.hasAttachment() && message.getAttachment().getAttachmentType() == ImageAttachment.IMAGE_TYPE) {
+            method = chatterCommands.getJsonPostForMultipartRequestEntity(uri, payload, (ImageAttachment) message.getAttachment());
+        }
+        else {
+            method = chatterCommands.getJsonPost(uri, payload);
+        }
 
-        HttpMethod method = chatterCommands.getJsonPost(uri, payload);
         method = tools.addHeaders(method, authToken);
 
         tools.executeMethod(method);
@@ -156,13 +163,13 @@ public class ChatterService {
 
     /**
      * <p>Sends a query {@link ChatterCommand} to the Salesforce API.</p>
-     * 
+     *
      * <p>This is done using a GET request.</p>
-     * 
+     *
      * <p>The return value will contain the status code and return header/body.</p>
-     * 
+     *
      * <p>The ChatterResponse body will most likely be JSON.</p>
-     * 
+     *
      * @param command Any command
      * @return The ChatterResponse from the API.
      * @throws IOException Thrown if anything goes wrong communicated with the Salesforce.com API.</p>
@@ -170,7 +177,7 @@ public class ChatterService {
      * @throws AuthenticationException
      */
     public ChatterResponse executeCommand(ChatterCommand command) throws IOException,
-        UnauthenticatedSessionException, AuthenticationException {
+            UnauthenticatedSessionException, AuthenticationException {
         if (!authenticated) {
             authenticateSession();
         }
