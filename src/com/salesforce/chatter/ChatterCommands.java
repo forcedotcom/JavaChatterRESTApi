@@ -27,6 +27,7 @@ package com.salesforce.chatter;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -116,7 +117,7 @@ public class ChatterCommands {
         }
 
         Map<String, List<Map<String, String>>> messageSegments = new HashMap<String, List<Map<String, String>>>();
-        Map<String, Object> json = new HashMap<String, Object>();
+        Map<String, Object> json = new LinkedHashMap<String, Object>();
 
         messageSegments.put("messageSegments", segments);
         json.put("body", messageSegments);

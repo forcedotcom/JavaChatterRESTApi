@@ -27,6 +27,7 @@ package com.salesforce.chatter.authentication.methods;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -58,7 +59,7 @@ public class InteractiveAuthenticationTest {
 
             ClientSecretAuthentication auth2 = mock(ClientSecretAuthentication.class);
             when(auth2.authenticate()).thenReturn(new ChatterAuthToken("abc"));
-            PowerMockito.whenNew(ClientSecretAuthentication.class).withArguments(any(), any()).thenReturn(auth2);
+            PowerMockito.whenNew(ClientSecretAuthentication.class).withArguments(any(), anyString()).thenReturn(auth2);
 
             System.setIn(in);
 
