@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'com.bmuschko.clover'
 
 version = 1.1
 
@@ -15,6 +16,17 @@ repositories {
     mavenCentral()
 }
 
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-clover-plugin:2.0.1'
+    }
+}
+
+
 dependencies {
     compile group: 'commons-httpclient', name: 'commons-httpclient', version: '3.1'
     compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9+'
@@ -24,4 +36,6 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-core', version: '1.+'
     testCompile group: 'org.powermock', name: 'powermock-api-mockito', version: '1.+'
     testCompile group: 'org.powermock', name: 'powermock-module-junit4', version: '1.+'
+
+    clover 'com.atlassian.clover:clover:4.1.1'
 }
