@@ -39,3 +39,9 @@ dependencies {
 
     clover 'com.atlassian.clover:clover:4.1.1'
 }
+
+clover {
+    report {
+        html = true
+    }
+}
