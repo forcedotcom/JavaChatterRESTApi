@@ -1,13 +1,17 @@
 # Java Chatter REST API
-================================
 
 Think the Chatter REST API is awesome and powerful, but maybe a bit overwhelming? This native Java implementation aims to keep the implementation simple
 while keeping all the power at your fingertips.
  
-# Overview
+## Build status
+![Build status][build-status]
+- Atlassian Project: https://jasperroel.atlassian.net/builds/browse/JCRA-JCRA
+- Code coverage report: https://jasperroel.atlassian.net/builds/browse/JCRA-JCRA/latest/artifact/JOB1/Clover-Report-%28System%29/dashboard.html
+
+## Overview
 This Java Chatter REST API is a simple library using POJO's to interact with the Chatter REST API.
 
-# Usage
+## Usage
 Simply download the java/src and required libraries and incorporate it into your project.
 
 Compiling the source is easy using gradle:
@@ -20,7 +24,7 @@ Or to run the unittests as well
 
 The jar file can be found at build/lib/JavaChatterRESTApi.jar.
 
-# Features
+## Features
 - Creating Chatter messages, including text, links, @mentions and #tags
 - Posting your status (on your own wall)
 - Posting to somebody else's wall
@@ -32,26 +36,26 @@ The jar file can be found at build/lib/JavaChatterRESTApi.jar.
 
 * The SOQL queries are executed through the REST API
 
-# Configuration and authentication
+## Configuration and authentication
 The Java Chatter REST API supports various forms of authentication.
 All of them require a form of the IChatterData information to be fed into them, but different methods require different parts of this object to be filled in. 
 
-## ClientSecret authentication
+### ClientSecret authentication
 
 Also see http://www.salesforce.com/us/developer/docs/api_streaming/Content/code_sample_auth_oauth.htm for how this works.
 
-## RefreshToken authentication
+### RefreshToken authentication
 If you already possess a Refresh token (from a previous client-secret authentication perhaps) you can use this authentication method.
 
-## Username and password
+### Username and password
 If your org allows it (grant_type=password), you can use the client ID, client Secret and your username and password to authenticate.
 This is discouraged and the ClientSecret authentication is preferred over this one.
 
-## Interactive authentication
+### Interactive authentication
 This requests information from the user to be returned via the console at runtime. Useful for token-less environments.
 It does requires a minimum of a Client Key and Client Callback to be configured.
 
-## Example of a configuration file/class to be used with Password authentication
+### Example of a configuration file/class to be used with Password authentication
 ```java
 public class ChatterData implements IChatterData {
 
@@ -69,7 +73,7 @@ public class ChatterData implements IChatterData {
 }
 ```
 
-# Examples
+## Examples
 You can find loads of practical examples in the test/integration/src/ folder under the com.salesforce.chatter package.
 For example: [TestChatterPost.java](test/integration/src/com/salesforce/chatter/TestChatterPost.java)
 
@@ -97,12 +101,11 @@ You create a simple Message object which holds whatever it is you would like to 
 The ChatterCommand decides where this message should go (to your own or somebody's wall, a particular group or as a response to somebody's thread).
 The ChatterData holds all the authentication information while the ChatterService takes care of making the magic happen
 
-# License
+## License
 The BSD 2-Clause License
 
 http://opensource.org/licenses/BSD-2-Clause
 
 See [LICENSE.txt](./LICENSE.txt)
 
-
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/6ca79e72bf275bb790cfda419b72675b "githalytics.com")](http://githalytics.com/forcedotcom/JavaChatterRESTApi)
+[build-status]: https://jasperroel-bamboo-agent.herokuapp.com/status/JCRA-JCRA "Build status"
